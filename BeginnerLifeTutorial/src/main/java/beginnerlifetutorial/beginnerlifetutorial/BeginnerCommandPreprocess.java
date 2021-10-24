@@ -1,9 +1,6 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +8,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeginnerCommandPreprocess implements Listener {
 
@@ -187,6 +187,38 @@ public class BeginnerCommandPreprocess implements Listener {
                 }catch (NullPointerException nullPointerException){
                     return;
                 }
+            }if(e.getMessage().equalsIgnoreCase("/smg")){
+                e.setCancelled(true);
+                Inventory smgMenu = Bukkit.createInventory(null, 9, "§8SELLMMITEM MENU");
+                ItemStack menu1 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+                ItemStack menu2 = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
+                ItemStack menu3 = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+                ItemMeta itemMeta1 = menu1.getItemMeta();
+                ItemMeta itemMeta2 = menu2.getItemMeta();
+                ItemMeta itemMeta3 = menu3.getItemMeta();
+                if(itemMeta1 == null || itemMeta2 == null || itemMeta3 == null ) return;
+                itemMeta1.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aSHOPを開く"));
+                itemMeta2.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&eSHOP注意点"));
+                itemMeta3.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&8売却可能アイテム一覧をみる"));
+                List<String> lore2 = new ArrayList<String>();
+                lore2.add(ChatColor.translateAlternateColorCodes('&', "&dSHOPのインベントリに"));
+                lore2.add(ChatColor.translateAlternateColorCodes('&', "&d指定アイテム以外を入れてしまうと"));
+                lore2.add(ChatColor.translateAlternateColorCodes('&', "&d一円にもならずアイテムが消えます"));
+                lore2.add(ChatColor.translateAlternateColorCodes('&', "&d消えたアイテムに関しては&c補填対象外&dです"));
+                itemMeta2.setLore(lore2);
+                List<String> lore3 = new ArrayList<String>();
+                lore3.add(ChatColor.translateAlternateColorCodes('&', "&d売却可能アイテムは"));
+                lore3.add(ChatColor.translateAlternateColorCodes('&', "&3一万円&f"));
+                itemMeta3.setLore(lore3);
+                menu1.setItemMeta(itemMeta1);
+                menu2.setItemMeta(itemMeta2);
+                menu3.setItemMeta(itemMeta3);
+                smgMenu.setItem(0, menu1);
+                smgMenu.setItem(5, menu2);
+                smgMenu.setItem(3, menu3);
+                Location loc = player.getLocation();
+                player.playSound(loc, Sound.BLOCK_CHEST_OPEN, 2, 1);
+                player.openInventory(smgMenu);
             }
         }
     }

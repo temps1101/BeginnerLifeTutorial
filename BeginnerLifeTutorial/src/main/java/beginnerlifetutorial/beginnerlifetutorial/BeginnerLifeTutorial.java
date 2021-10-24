@@ -1,17 +1,18 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
@@ -24,6 +25,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TutorialButtonSelect(this), this);
         Bukkit.getPluginManager().registerEvents(new BeginnerLifeJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new BeginnerCommandPreprocess(this), this);
+        Bukkit.getPluginManager().registerEvents(new BeginnerGUI(this), this);
         getCommand("ltutorial").setExecutor(new TutorialCommand(this));
         saveDefaultConfig();
     }
@@ -58,6 +60,28 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
                         }
                     }
                 }
+            }
+            if (e.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "&8SELLMMITEM SHOP"))) {
+                ItemStack[] contents = inventory.getContents();
+                for (int i = 0; i < 9; i++) {
+                    ItemStack content = contents[i];
+                    if (content == null) {
+                        continue;
+                    }
+                    ItemMeta itemMeta = content.getItemMeta();
+                    if(itemMeta == null) return;
+                    Material material = content.getType();
+                    if(material == Material.PAPER){
+                        if(content.getAmount() == 10){
+                            if (itemMeta.getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&3一万円"))) {
+                                getServer().dispatchCommand(getServer().getConsoleSender(),"mm items give " + player.getName() + " obsidian_sword 1");
+                                getServer().dispatchCommand(getServer().getConsoleSender(),"mm items give " + player.getName() + " obsidian_chestplate 1");
+                            }
+                        }
+                    }
+                }
+                Location loc = player.getLocation();
+                player.playSound(loc,Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
             }
         }
     }

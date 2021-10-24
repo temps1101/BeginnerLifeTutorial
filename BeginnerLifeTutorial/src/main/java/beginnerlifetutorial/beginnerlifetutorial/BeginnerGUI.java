@@ -75,13 +75,13 @@ public class BeginnerGUI implements Listener {
                             itemMeta6 == null ||
                             itemMeta7 == null
                     ) return;
-                    List<String> lore1 = new ArrayList<String>();
-                    List<String> lore2 = new ArrayList<String>();
-                    List<String> lore3 = new ArrayList<String>();
-                    List<String> lore4 = new ArrayList<String>();
-                    List<String> lore5 = new ArrayList<String>();
-                    List<String> lore6 = new ArrayList<String>();
-                    List<String> lore7 = new ArrayList<String>();
+                    List<String> lore1 = new ArrayList<>();
+                    List<String> lore2 = new ArrayList<>();
+                    List<String> lore3 = new ArrayList<>();
+                    List<String> lore4 = new ArrayList<>();
+                    List<String> lore5 = new ArrayList<>();
+                    List<String> lore6 = new ArrayList<>();
+                    List<String> lore7 = new ArrayList<>();
                     lore1.add(ChatColor.translateAlternateColorCodes('&', "&f購入: &c¥5000.0"));
                     lore2.add(ChatColor.translateAlternateColorCodes('&', "&f購入: &c¥10000.0"));
                     lore3.add(ChatColor.translateAlternateColorCodes('&', "&f購入: &c¥20000.0"));
@@ -127,6 +127,20 @@ public class BeginnerGUI implements Listener {
                     }
                 }
                 e.setCancelled(true);
+            }
+            if (e.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "&8SELLMMITEM MENU"))) {
+                ItemMeta itemMeta = slot.getItemMeta();
+                if(itemMeta == null) return;
+                if (slot.getType() == Material.GREEN_STAINED_GLASS_PANE) {
+                    if (itemMeta.getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&aSHOPを開く"))) {
+                        Inventory smgMenu = Bukkit.createInventory(null, 9, "§8SELLMMITEM SHOP");
+                        Location loc = player.getLocation();
+                        player.playSound(loc,Sound.BLOCK_CHEST_OPEN, 2, 1);
+                        player.openInventory(smgMenu);
+                    }
+                } else {
+                    e.setCancelled(true);
+                }
             }
         }
     }
