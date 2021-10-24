@@ -1,0 +1,16 @@
+name: BeginnerLifeTutorial
+version: '1.0'
+main: beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial
+api-version: 1.15
+authors: [ 46kuri_ ]
+
+commands:
+  ltutorial:
+    description: チュートリアルコマンド
+    permission: ltutorial.permission.member
+
+permissions:
+  ltutorial.permission.admin:
+    default: op
+  ltutorial.permission.member:
+    default: true
