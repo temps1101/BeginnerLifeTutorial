@@ -3,6 +3,7 @@ package beginnerlifetutorial.beginnerlifetutorial;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,20 +37,25 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
     public void onClose(InventoryCloseEvent e){
         Inventory inventory = e.getInventory();
         Player player = (Player) e.getPlayer();
-        if (e.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "Menu &f> &rSell"))) {
-            ItemStack[] contents = inventory.getContents();
-            for (int i = 0; i < 53; i++) {
-                ItemStack content = contents[i];
-                if (content == null) {
-                    continue;
-                }
-                Material material = content.getType();
-                if(material == Material.COBBLESTONE){
-                    if(content.getAmount() == 64){
-                        player.sendMessage("64個の丸石を回収し10万円が報酬として付与されました");
-                        getServer().dispatchCommand(getServer().getConsoleSender(),"mm items give " + player.getName() + " yukiti_ticket 10");
-                    }else{
-                        player.getInventory().addItem(content);
+        World world = player.getWorld();
+        String worldName = world.getName();
+        String configWorld = getConfig().getString("worldName");
+        if(worldName.equals(configWorld)){
+            if (e.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "Menu &f> &rSell"))) {
+                ItemStack[] contents = inventory.getContents();
+                for (int i = 0; i < 53; i++) {
+                    ItemStack content = contents[i];
+                    if (content == null) {
+                        continue;
+                    }
+                    Material material = content.getType();
+                    if(material == Material.COBBLESTONE){
+                        if(content.getAmount() == 64){
+                            player.sendMessage("64個の丸石を回収し10万円が報酬として付与されました");
+                            getServer().dispatchCommand(getServer().getConsoleSender(),"mm items give " + player.getName() + " yukiti_ticket 10");
+                        }else{
+                            player.getInventory().addItem(content);
+                        }
                     }
                 }
             }
