@@ -18,7 +18,6 @@ public class TutorialCommand implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("ltutorial")) {
-            if (!(sender instanceof Player)) return false;
             if (args.length <= 0) {
                 return true;
             }
