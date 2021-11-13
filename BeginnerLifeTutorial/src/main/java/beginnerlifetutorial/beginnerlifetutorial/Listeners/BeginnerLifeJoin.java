@@ -1,5 +1,6 @@
-package beginnerlifetutorial.beginnerlifetutorial;
+package beginnerlifetutorial.beginnerlifetutorial.Listeners;
 
+import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
