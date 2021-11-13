@@ -2,7 +2,7 @@ name: BeginnerLifeTutorial
 version: '${project.version}'
 main: beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial
 api-version: 1.15
-authors: [ 46kuri_ ]
+authors: [ 46kuri_, temps1101 ]
 
 commands:
   ltutorial:
