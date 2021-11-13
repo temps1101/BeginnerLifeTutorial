@@ -1,9 +1,9 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
-import beginnerlifetutorial.beginnerlifetutorial.Listeners.BeginnerCommandPreprocess;
-import beginnerlifetutorial.beginnerlifetutorial.Listeners.BeginnerGUI;
-import beginnerlifetutorial.beginnerlifetutorial.Listeners.BeginnerLifeJoin;
-import beginnerlifetutorial.beginnerlifetutorial.Listeners.TutorialButtonSelect;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerCommandPreprocess;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerGUI;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerLifeJoin;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialButtonSelect;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

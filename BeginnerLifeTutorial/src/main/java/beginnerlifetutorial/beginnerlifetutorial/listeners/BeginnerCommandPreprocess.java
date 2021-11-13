@@ -1,4 +1,4 @@
-package beginnerlifetutorial.beginnerlifetutorial.Listeners;
+package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import org.bukkit.*;
