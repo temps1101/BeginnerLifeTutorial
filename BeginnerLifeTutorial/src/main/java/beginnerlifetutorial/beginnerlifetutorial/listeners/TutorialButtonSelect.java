@@ -1,5 +1,6 @@
-package beginnerlifetutorial.beginnerlifetutorial;
+package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
+import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;

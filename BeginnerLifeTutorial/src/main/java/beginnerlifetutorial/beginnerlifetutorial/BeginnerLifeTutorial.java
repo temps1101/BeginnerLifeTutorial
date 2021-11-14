@@ -1,5 +1,9 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerCommandPreprocess;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerGUI;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.BeginnerLifeJoin;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialButtonSelect;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,17 +14,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
-
     public HashMap<Player, Integer> map = new HashMap<>();
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        Inventories.initialize(); // インベントリデータを初期化
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getPluginManager().registerEvents(new TutorialButtonSelect(this), this);
         Bukkit.getPluginManager().registerEvents(new BeginnerLifeJoin(this), this);
@@ -32,7 +33,6 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
     @EventHandler

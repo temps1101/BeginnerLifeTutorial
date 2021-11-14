@@ -1,5 +1,6 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
+import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,14 +19,15 @@ public class TutorialCommand implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("ltutorial")) {
-            if (!(sender instanceof Player)) return false;
             if (args.length <= 0) {
+                sender.sendMessage(Chat.f("引数を設定してください", true));
                 return true;
             }
+
             if(args[0].equalsIgnoreCase("reload")){
                 if (sender.hasPermission("ltutorial.permission.admin")) {
                     plugin.reloadConfig();
-                    sender.sendMessage("configリロードしました");
+                    sender.sendMessage(Chat.f("configリロードしました", true));
                 }
                 return true;
             }
