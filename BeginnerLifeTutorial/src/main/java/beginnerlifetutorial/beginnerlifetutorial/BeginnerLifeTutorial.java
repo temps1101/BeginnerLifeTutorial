@@ -21,6 +21,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        Inventories.initialize(); // インベントリデータを初期化
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getPluginManager().registerEvents(new TutorialButtonSelect(this), this);
         Bukkit.getPluginManager().registerEvents(new BeginnerLifeJoin(this), this);
