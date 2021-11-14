@@ -15,8 +15,8 @@ public class ItemUtil {
      * @param lore アイテムの説明文
      * @return 名付けられたアイテム
      */
-    public static ItemStack createItem(Material type, String name, String... lore) {
-        ItemStack item = new ItemStack(type);
+    public static ItemStack createItem(Material type, String name, int amount, String... lore) {
+        ItemStack item = new ItemStack(type, amount);
         ItemMeta meta = item.getItemMeta();
 
         if (name != null) {

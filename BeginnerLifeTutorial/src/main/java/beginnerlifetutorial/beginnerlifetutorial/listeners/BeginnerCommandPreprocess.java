@@ -13,10 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class BeginnerCommandPreprocess implements Listener {
-
     private final BeginnerLifeTutorial plugin;
-    private Inventory shopMenu = Inventories.getShopInventory();
-    private Inventory smgMenu = Inventories.getSmgMenu();
 
     public BeginnerCommandPreprocess(BeginnerLifeTutorial beginnerLifeTutorial) {
         this.plugin = beginnerLifeTutorial;
@@ -34,12 +31,12 @@ public class BeginnerCommandPreprocess implements Listener {
                 if (inventory.contains(Material.DIAMOND)) {
                     player.sendMessage(Chat.f("&c既にあなたはダイヤを持っています", false));
                 }else {
-                    player.openInventory(shopMenu);
+                    player.openInventory(Inventories.getShopInventory());
                 }
             }
             if (e.getMessage().equalsIgnoreCase("/ott")) {
                 e.setCancelled(true);
-                ItemStack ontimeTicket = ItemUtil.createItem(Material.PAPER, "&aオンタイムチケット");
+                ItemStack ontimeTicket = ItemUtil.createItem(Material.PAPER, "&aオンタイムチケット", 1);
                 Inventory inventory = player.getInventory();
                 if (inventory.contains(ontimeTicket)) {
                     player.sendMessage(Chat.f("&c既にあなたはオンタイムチケットを持っています", false));
@@ -66,7 +63,7 @@ public class BeginnerCommandPreprocess implements Listener {
                 e.setCancelled(true);
 
                 player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 2, 1);
-                player.openInventory(smgMenu);
+                player.openInventory(Inventories.getSmgMenu());
             }
         }
     }
