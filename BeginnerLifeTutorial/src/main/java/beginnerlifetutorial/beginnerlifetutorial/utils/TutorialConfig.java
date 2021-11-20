@@ -1,5 +1,7 @@
 package beginnerlifetutorial.beginnerlifetutorial.utils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
@@ -38,7 +40,6 @@ public class TutorialConfig {
                 shopMoneyDoorLocation[i] = (double) shopMoneyDoorLocation_temp.get(i);
                 dungeonDoorLocation[i] = (double) dungeonDoorLocation_temp.get(i);
                 raidDoorLocation[i] = (double) raidDoorLocation_temp.get(i);
-
             }
         }
     }
@@ -47,28 +48,32 @@ public class TutorialConfig {
         return tutorialWorldName;
     }
 
-    public static double[] getFirstSpawnLocation() {
-        return firstSpawnLocation;
+    public static Location getFirstSpawnLocation(String worldName) {
+        return toLocation(firstSpawnLocation, worldName);
     }
 
-    public static double[] getTspLocation() {
-        return tspLocation;
+    public static Location getTspLocation(String worldName) {
+        return toLocation(tspLocation, worldName);
     }
 
-    public static double[] getResourceDoorLocation() {
-        return resourceDoorLocation;
+    public static Location getResourceDoorLocation(String worldName) {
+        return toLocation(resourceDoorLocation, worldName);
     }
 
-    public static double[] getShopMoneyDoorLocation() {
-        return shopMoneyDoorLocation;
+    public static Location getShopMoneyDoorLocation(String worldName) {
+        return toLocation(shopMoneyDoorLocation, worldName);
     }
 
-    public static double[] getDungeonDoorLocation() {
-        return dungeonDoorLocation;
+    public static Location getDungeonDoorLocation(String worldName) {
+        return toLocation(dungeonDoorLocation, worldName);
     }
 
-    public static double[] getRaidDoorLocation() {
-        return raidDoorLocation;
+    public static Location getRaidDoorLocation(String worldName) {
+        return toLocation(raidDoorLocation, worldName);
+    }
+
+    private static Location toLocation(double[] configLocation, String worldName) {
+        return new Location(Bukkit.getWorld(worldName), configLocation[0], configLocation[1], configLocation[2]);
     }
 
 }
