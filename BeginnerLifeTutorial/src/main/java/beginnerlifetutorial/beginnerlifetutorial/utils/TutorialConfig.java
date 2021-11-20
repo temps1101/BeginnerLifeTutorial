@@ -48,28 +48,28 @@ public class TutorialConfig {
         return tutorialWorldName;
     }
 
-    public static Location getFirstSpawnLocation(String worldName) {
-        return toLocation(firstSpawnLocation, worldName);
+    public static Location getFirstSpawnLocation() {
+        return toLocation(firstSpawnLocation, tutorialWorldName);
     }
 
-    public static Location getTspLocation(String worldName) {
-        return toLocation(tspLocation, worldName);
+    public static Location getTspLocation() {
+        return toLocation(tspLocation, tutorialWorldName);
     }
 
-    public static Location getResourceDoorLocation(String worldName) {
-        return toLocation(resourceDoorLocation, worldName);
+    public static Location getResourceDoorLocation() {
+        return toLocation(resourceDoorLocation, tutorialWorldName);
     }
 
-    public static Location getShopMoneyDoorLocation(String worldName) {
-        return toLocation(shopMoneyDoorLocation, worldName);
+    public static Location getShopMoneyDoorLocation() {
+        return toLocation(shopMoneyDoorLocation, tutorialWorldName);
     }
 
-    public static Location getDungeonDoorLocation(String worldName) {
-        return toLocation(dungeonDoorLocation, worldName);
+    public static Location getDungeonDoorLocation() {
+        return toLocation(dungeonDoorLocation, tutorialWorldName);
     }
 
-    public static Location getRaidDoorLocation(String worldName) {
-        return toLocation(raidDoorLocation, worldName);
+    public static Location getRaidDoorLocation() {
+        return toLocation(raidDoorLocation, tutorialWorldName);
     }
 
     private static Location toLocation(double[] configLocation, String worldName) {
