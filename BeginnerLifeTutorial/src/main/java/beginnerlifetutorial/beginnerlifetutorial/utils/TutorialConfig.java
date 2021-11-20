@@ -32,14 +32,14 @@ public class TutorialConfig {
             tutorialWorldName = tutorialWorldName_temp;
 
             for (int i=0; i<3; i++) {
-                firstSpawnLocation[i] = (double) firstSpawnLocation_temp.get(i);
-                tspLocation[i] = (double) tspLocation_temp.get(i);
+                firstSpawnLocation[i] = (double) (int) firstSpawnLocation_temp.get(i);
+                tspLocation[i] = (double) (int) tspLocation_temp.get(i);
 
                 // チュートリアルへの扉の座標系
-                resourceDoorLocation[i] = (double) resourceDoorLocation_temp.get(i);
-                shopMoneyDoorLocation[i] = (double) shopMoneyDoorLocation_temp.get(i);
-                dungeonDoorLocation[i] = (double) dungeonDoorLocation_temp.get(i);
-                raidDoorLocation[i] = (double) raidDoorLocation_temp.get(i);
+                resourceDoorLocation[i] = (double) (int) resourceDoorLocation_temp.get(i);
+                shopMoneyDoorLocation[i] = (double) (int) shopMoneyDoorLocation_temp.get(i);
+                dungeonDoorLocation[i] = (double) (int) dungeonDoorLocation_temp.get(i);
+                raidDoorLocation[i] = (double) (int) raidDoorLocation_temp.get(i);
             }
         }
     }
