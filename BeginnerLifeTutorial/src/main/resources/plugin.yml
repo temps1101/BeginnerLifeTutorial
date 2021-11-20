@@ -6,8 +6,14 @@ authors: [ 46kuri_, temps1101 ]
 
 commands:
   ltutorial:
+    aliases: [lt]
     description: チュートリアルコマンド
     permission: ltutorial.permission.member
+
+  ltutorialAdmin:
+    aliases: [lta]
+    description: チュートリアルの管理
+    permission: ltutorial.permission.admin
 
 permissions:
   ltutorial.permission.admin:
