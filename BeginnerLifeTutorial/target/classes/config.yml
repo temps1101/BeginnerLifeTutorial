@@ -1,2 +1,5 @@
-worldName: "world"
-joinText: "Life鯖を遊ぶ上で気を付けてほしいことが一つあります\n\nそれは「他人に迷惑をかけてはいけない」という事です\n\n---------------------------\n\n https://www.azisaba.net/server-intro/life/#rule\n\n---------------------------\n\nこのリンク先にて様々なルールが載っています\n確認出来たらルールに同意すると書かれたボタンを押しましょう"
+# TSPは三重塔のことです。
+
+tutorialWorldName: "world"
+firstSpawnLocation: [0, 0, 0]
+tspLocation: [-8, 8, -522]
