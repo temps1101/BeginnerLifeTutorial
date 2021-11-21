@@ -18,10 +18,11 @@ public class TutorialCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (commandCoolDownCache.containsKey(player.getName())) {
-                int timeRemaining = (int) (System.currentTimeMillis() - commandCoolDownCache.get(player.getName())) / 1000;
-                if (timeRemaining < 10) {
+                int timeRemaining = 10 - (int) (System.currentTimeMillis() - commandCoolDownCache.get(player.getName())) / 1000;
+                if (timeRemaining <= 0) {
                     player.teleport(TutorialConfig.getTspLocation());
                     player.sendMessage(Chat.f("&6あなたをチュートリアルにテレポートさせました", false));
+                    commandCoolDownCache.put(player.getName(), System.currentTimeMillis());
                 } else {
                     player.sendMessage(Chat.f("&cこのコマンドは現在クールダウン中です！残り：{0}秒", false, timeRemaining));
                 }
