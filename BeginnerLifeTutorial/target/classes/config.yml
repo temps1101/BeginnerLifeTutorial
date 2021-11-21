@@ -3,3 +3,9 @@
 tutorialWorldName: "world"
 firstSpawnLocation: [0, 0, 0]
 tspLocation: [-8, 8, -522]
+
+# チュートリアルへの扉の座標系
+resourceDoor: [0, 0, 0]
+shopMoneyDoor: [0, 0, 0]
+dungeonDoor: [0, 0, 0]
+raidDoor: [0, 0, 0]
