@@ -8,7 +8,7 @@ public class TutorialStartEvent extends Event {
     public static enum TutorialType {
         RESOURCE, SHOPMONEY, DUNGEON, RAID
     }
-    public final Player player;
+    private final Player player;
     private final HandlerList HANDLERS = new HandlerList();
     private final TutorialType tutorialType;
 
