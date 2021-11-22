@@ -17,6 +17,9 @@ public class TutorialConfig {
     private static double[] dungeonDoorLocation = new double[3];
     private static double[] raidDoorLocation = new double[3];
 
+    // 資源チュートリアルの設定
+    private static double[] resourceLocation = new double[3];
+
     public static void load(FileConfiguration configuration) {
         String tutorialWorldName_temp = configuration.getString("tutorialWorldName");
         List<?> firstSpawnLocation_temp = configuration.getList("firstSpawnLocation");
@@ -27,6 +30,7 @@ public class TutorialConfig {
         List<?> shopMoneyDoorLocation_temp = configuration.getList("shopMoneyDoor");
         List<?> dungeonDoorLocation_temp = configuration.getList("dungeonDoor");
         List<?> raidDoorLocation_temp = configuration.getList("raidDoor");
+        List<?> resourceLocation_temp = configuration.getList("resourceLocation");
 
         if (tutorialWorldName_temp != null && firstSpawnLocation_temp != null && tspLocation_temp != null) {
             tutorialWorldName = tutorialWorldName_temp;
@@ -40,6 +44,7 @@ public class TutorialConfig {
                 shopMoneyDoorLocation[i] = (double) (int) shopMoneyDoorLocation_temp.get(i);
                 dungeonDoorLocation[i] = (double) (int) dungeonDoorLocation_temp.get(i);
                 raidDoorLocation[i] = (double) (int) raidDoorLocation_temp.get(i);
+                resourceLocation[i] = (double) (int) resourceLocation_temp.get(i);
             }
         }
     }
@@ -70,6 +75,10 @@ public class TutorialConfig {
 
     public static Location getRaidDoorLocation() {
         return toLocation(raidDoorLocation, tutorialWorldName);
+    }
+
+    public static Location getResourceLocation() {
+        return toLocation(resourceLocation, tutorialWorldName);
     }
 
     private static Location toLocation(double[] configLocation, String worldName) {
