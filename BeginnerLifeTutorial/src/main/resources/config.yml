@@ -9,3 +9,6 @@ resourceDoor: [0, 0, 0]
 shopMoneyDoor: [0, 0, 0]
 dungeonDoor: [0, 0, 0]
 raidDoor: [0, 0, 0]
+
+# 資源チュートリアルの設定
+resourceLocation: [0, 0, 0]
