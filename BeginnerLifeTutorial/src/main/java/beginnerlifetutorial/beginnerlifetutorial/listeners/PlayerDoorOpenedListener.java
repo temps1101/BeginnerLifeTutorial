@@ -13,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static beginnerlifetutorial.beginnerlifetutorial.events.TutorialStartEvent.TutorialType.RESOURCE;
+
 public class PlayerDoorOpenedListener implements Listener {
     private Material DOOR = Material.DARK_OAK_DOOR;
     @EventHandler
@@ -23,7 +25,7 @@ public class PlayerDoorOpenedListener implements Listener {
 
             if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation()) ) {
                 player.teleport(TutorialConfig.getResourceLocation());
-                Bukkit.getPluginManager().callEvent(new TutorialStartEvent(player, TutorialStartEvent.TutorialType.RESOURCE));
+                Bukkit.getPluginManager().callEvent(new TutorialStartEvent(player, RESOURCE));
                 Chat.fancySend(player, true, 0, Chat.f("&6資源チュートリアルにテレポートさせました！", false));
                 event.setCancelled(true);
             } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation()) ) {
