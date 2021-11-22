@@ -1,6 +1,9 @@
 package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
+import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStartEvent;
+import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -19,9 +22,10 @@ public class PlayerDoorOpenedListener implements Listener {
             Player player = event.getPlayer();
 
             if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation()) ) {
-                player.sendMessage("資源を開けましたねん？"); // TODO デバッグだからあとでとる。
+                player.teleport(TutorialConfig.getResourceLocation());
+                Bukkit.getPluginManager().callEvent(new TutorialStartEvent(player, TutorialStartEvent.TutorialType.RESOURCE));
+                Chat.fancySend(player, true, 0, Chat.f("&6資源チュートリアルにテレポートさせました！", false));
                 event.setCancelled(true);
-                // 資源チュートリアルにワープ
             } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation()) ) {
                 player.sendMessage("ショップ系を開けましたねん？"); // TODO デバッグだからあとでとる。
                 event.setCancelled(true);
