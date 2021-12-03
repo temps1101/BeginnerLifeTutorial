@@ -9,17 +9,11 @@ public class TutorialStartEvent extends Event {
         RESOURCE, SHOPMONEY, DUNGEON, RAID
     }
     private final Player player;
-    private final HandlerList HANDLERS = new HandlerList();
     private final TutorialType tutorialType;
 
     public TutorialStartEvent(Player player, TutorialType tutorialType) {
         this.player = player;
         this.tutorialType = tutorialType;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return HANDLERS;
     }
 
     public Player getPlayer() {
@@ -28,5 +22,16 @@ public class TutorialStartEvent extends Event {
 
     public TutorialType getTutorialType() {
         return tutorialType;
+    }
+
+    private static final HandlerList HANDLERS = new HandlerList();
+
+    @Override
+    public HandlerList getHandlers() {
+        return HANDLERS;
+    }
+
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
     }
 }
