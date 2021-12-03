@@ -1,7 +1,6 @@
 package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
 import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStartEvent;
-import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,33 +12,36 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import static beginnerlifetutorial.beginnerlifetutorial.events.TutorialStartEvent.TutorialType.RESOURCE;
+import static beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial.getPlugin;
+import static beginnerlifetutorial.beginnerlifetutorial.events.TutorialStartEvent.TutorialType.*;
 
 public class PlayerDoorOpenedListener implements Listener {
     private Material DOOR = Material.DARK_OAK_DOOR;
     @EventHandler
     public void onDoorOpened(PlayerInteractEvent event) {
-        Block clickedBlock = event.getClickedBlock();
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && clickedBlock.getType() == DOOR) {
-            Player player = event.getPlayer();
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            Block clickedBlock = event.getClickedBlock();
+            if (clickedBlock.getType() == DOOR) {
+                Player player = event.getPlayer();
+                TutorialStartEvent.TutorialType tutorialType;
 
-            if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation()) ) {
-                player.teleport(TutorialConfig.getResourceLocation());
-                Bukkit.getPluginManager().callEvent(new TutorialStartEvent(player, RESOURCE));
-                Chat.fancySend(player, true, 0, Chat.f("&6資源チュートリアルにテレポートさせました！", false));
-                event.setCancelled(true);
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation()) ) {
-                player.sendMessage("ショップ系を開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // ショップ&マネーチュートリアルにワープ
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getDungeonDoorLocation()) ) {
-                player.sendMessage("ダンジョンを開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // ダンジョンチュートリアルにワープ
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getRaidDoorLocation()) ) {
-                player.sendMessage("レイドを開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // レイドチュートリアルにワープ
+                if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation()) ) {
+                    tutorialType = RESOURCE;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation()) ) {
+                    tutorialType = SHOPMONEY;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getDungeonDoorLocation()) ) {
+                    tutorialType = DUNGEON;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getRaidDoorLocation()) ) {
+                    tutorialType = RAID;
+                } else {
+                    return;
+                }
+
+                long ticks = 20 * (long) 3; // 三秒待つってことです
+                Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), () -> {
+                    Bukkit.getPluginManager().callEvent(new TutorialStartEvent(player, tutorialType));
+                    event.setCancelled(true);
+                }, ticks);
             }
         }
     }
