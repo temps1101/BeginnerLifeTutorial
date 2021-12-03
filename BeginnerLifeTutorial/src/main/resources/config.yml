@@ -1,6 +1,5 @@
 # TSPは三重塔のことです。
 
-tutorialWorldName: "world"
 firstSpawnLocation: [0, 0, 0]
 tspLocation: [-8, 8, -522]
 
@@ -12,3 +11,6 @@ raidDoor: [0, 0, 0]
 
 # 資源チュートリアルの設定
 resourceLocation: [0, 0, 0]
+shopMoneyLocation: [0, 0, 0]
+dungeonLocation: [0, 0, 0]
+raidLocation: [0, 0, 0]
