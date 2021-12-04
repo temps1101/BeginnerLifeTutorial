@@ -4,7 +4,6 @@ import beginnerlifetutorial.beginnerlifetutorial.commands.AdminCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.TutorialCommand;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerDoorOpenedListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerFirstJoinListener;
-import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialStartListener;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import org.bukkit.Bukkit;
