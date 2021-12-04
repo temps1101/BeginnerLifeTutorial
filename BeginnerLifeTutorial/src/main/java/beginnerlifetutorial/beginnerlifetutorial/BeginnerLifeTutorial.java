@@ -32,7 +32,6 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDoorOpenedListener(), this);
-        Bukkit.getPluginManager().registerEvents(new TutorialStartListener(), this);
     }
 
     @Override
