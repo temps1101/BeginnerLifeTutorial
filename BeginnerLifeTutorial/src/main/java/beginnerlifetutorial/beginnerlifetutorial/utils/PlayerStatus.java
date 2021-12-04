@@ -7,6 +7,8 @@ import org.bukkit.inventory.PlayerInventory;
 public class PlayerStatus {
     private TutorialType tutorialType;
     private TutorialPhase tutorialPhase;
+
+    // 資源チュートリアル用
     private PlayerInventory beforeTutorialInventory;
 
     public void setTutorialType(TutorialType tutorialType) {
