@@ -7,25 +7,26 @@ import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerFirstJoinListen
 import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialProcessor;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
     private static BeginnerLifeTutorial plugin;
+    private static Economy economy;
     private static Map<Player, PlayerStatus> playerCache = new HashMap<>();
 
     @Override
     public void onEnable() {
         plugin = this;
+        setupEconomy();
 
         saveDefaultConfig();
         TutorialConfig.load(getConfig());
@@ -40,6 +41,15 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
+    }
+
+    private void setupEconomy() {
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        economy = rsp.getProvider();
+    }
+
+    public static Economy getEconomy() {
+        return economy;
     }
 
     public static BeginnerLifeTutorial getPlugin() {
