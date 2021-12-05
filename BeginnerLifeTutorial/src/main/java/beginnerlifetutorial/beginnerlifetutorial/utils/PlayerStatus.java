@@ -10,6 +10,7 @@ public class PlayerStatus {
 
     // 資源チュートリアル用
     private PlayerInventory beforeTutorialInventory;
+    private double beforeTutorialBalance;
 
     public void setTutorialType(TutorialType tutorialType) {
         this.tutorialType = tutorialType;
@@ -23,6 +24,10 @@ public class PlayerStatus {
         this.beforeTutorialInventory = beforeTutorialInventory;
     }
 
+    public void setBeforeTutorialBalance(double beforeTutorialBalance) {
+        this.beforeTutorialBalance = beforeTutorialBalance;
+    }
+
     public TutorialType getTutorialType() {
         return tutorialType;
     }
@@ -33,5 +38,9 @@ public class PlayerStatus {
 
     public PlayerInventory getBeforeTutorialInventory() {
         return beforeTutorialInventory;
+    }
+
+    public double getBeforeTutorialBalance() {
+        return beforeTutorialBalance;
     }
 }
