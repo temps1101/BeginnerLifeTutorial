@@ -7,6 +7,7 @@ import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.ItemUtil;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,14 +28,16 @@ public class TutorialProcessor implements Listener {
                         // 資源チュートリアル開始
                         startProcess(player, RESOURCE);
                         Chat.fancySend(player, true, 4, Chat.f("&6ここは資源ワールドです。", false));
-                        Chat.fancySend(player, true, 4, Chat.f("&6まずは今入手した桑で目の前の小麦を収穫してみましょう。", false));
+                        Chat.fancySend(player, true, 8, Chat.f("&6まずは今入手した桑で目の前の小麦を収穫してみましょう。", false));
 
-                        playerStatus.setBeforeTutorialInventory(player.getInventory());
-                        BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
-                        player.getInventory().clear();
-                        player.getInventory().setItemInMainHand(ItemUtil.createItem(Material.DIAMOND_HOE, "&6チュートリアル用クワ", 1, "&fチュートリアル用に作られた桑", "&f持っていたアイテムはチュートリアル終了後に返却されます。"));
+                        Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
+                            playerStatus.setBeforeTutorialInventory(player.getInventory());
+                            BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                            player.getInventory().clear();
+                            player.getInventory().setItemInMainHand(ItemUtil.createItem(Material.DIAMOND_HOE, "&6チュートリアル用クワ", 1, "&fチュートリアル用に作られた桑", "&f持っていたアイテムはチュートリアル終了後に返却されます。"));
+                        }, 20*8);
 
-                        Chat.fancySend(player, true, 1, Chat.f("&6桑で小麦を右クリックすると小麦を回収できます。", false));
+                        Chat.fancySend(player, true, 10, Chat.f("&6桑で小麦を右クリックすると小麦を回収できます。", false));
 
                         break;
 
@@ -43,6 +46,12 @@ public class TutorialProcessor implements Listener {
                         Chat.fancySend(player, true, 4, Chat.f("&6MCMMOのレベルを増やすと使えるスキルが増え、jobsのレベルを増やすともらえるお金が増えます。", false));
                         Chat.fancySend(player, true, 4, Chat.f("&6次は桑のスキルを使って収穫してみましょう。", false));
                         Chat.fancySend(player, true, 4, Chat.f("&6桑を一度右クリックした後、画面下部に『Green Terra』と表示が出たら、小麦を左クリックで収穫しましょう。", false));
+
+                        break;
+
+                    case GREEN_TERRA_USED:
+                        Chat.fancySend(player, true, 3, Chat.f("&6スキルを使って収穫することで、収穫量を増やしたり、自動でタネを植え直したりできます。", false));
+                        Chat.fancySend(player, true, 4, Chat.f("&6桑以外にもこのサーバーにはたくさんのスキルがあります。https://wikiここで確認してみてください。", false));
                 }
 
                 break;
