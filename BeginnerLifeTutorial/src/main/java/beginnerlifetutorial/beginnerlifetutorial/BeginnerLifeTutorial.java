@@ -4,13 +4,17 @@ import beginnerlifetutorial.beginnerlifetutorial.commands.AdminCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.TutorialCommand;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerDoorOpenedListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerFirstJoinListener;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialProcessor;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +35,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDoorOpenedListener(), this);
+        Bukkit.getPluginManager().registerEvents(new TutorialProcessor(), this);
     }
 
     @Override
