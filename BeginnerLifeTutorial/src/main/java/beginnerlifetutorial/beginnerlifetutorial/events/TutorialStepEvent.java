@@ -6,18 +6,22 @@ import org.bukkit.event.HandlerList;
 
 public class TutorialStepEvent extends Event{
     private final Player player;
-    private final HandlerList HANDLERS = new HandlerList();
-
     public TutorialStepEvent(Player player) {
         this.player = player;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    private static final HandlerList HANDLERS = new HandlerList();
 
     @Override
     public HandlerList getHandlers() {
         return HANDLERS;
     }
 
-    public Player getPlayer() {
-        return player;
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
     }
 }
