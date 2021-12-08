@@ -48,7 +48,7 @@ public class AdminCommand implements CommandExecutor {
 
                     return true;
 
-                case "drawback":
+                case "rollback":
                     if (sender instanceof Player) {
                         Player player = (Player) sender;
                         PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
