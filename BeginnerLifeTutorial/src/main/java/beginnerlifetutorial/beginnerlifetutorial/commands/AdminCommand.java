@@ -68,6 +68,7 @@ public class AdminCommand implements CommandExecutor {
                 default:
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin reload", true));
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin status", true));
+                    sender.sendMessage(Chat.f("&6/ltutorialAdmin rollback", true));
                     return true;
             }
         }
