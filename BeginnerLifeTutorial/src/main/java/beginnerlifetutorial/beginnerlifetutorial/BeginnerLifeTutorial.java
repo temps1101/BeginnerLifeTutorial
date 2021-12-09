@@ -2,6 +2,7 @@ package beginnerlifetutorial.beginnerlifetutorial;
 
 import beginnerlifetutorial.beginnerlifetutorial.commands.AdminCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.TutorialCommand;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.ResourceTutorialWorldListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerDoorOpenedListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerFirstJoinListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialProcessor;
@@ -36,6 +37,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDoorOpenedListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ResourceTutorialWorldListener(), this);
         Bukkit.getPluginManager().registerEvents(new TutorialProcessor(), this);
     }
 
