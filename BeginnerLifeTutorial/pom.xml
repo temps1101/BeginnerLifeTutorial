@@ -87,5 +87,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/mcMMO.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.github.Zrips</groupId>
+            <artifactId>Jobs</artifactId>
+            <version>4.17.2</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
