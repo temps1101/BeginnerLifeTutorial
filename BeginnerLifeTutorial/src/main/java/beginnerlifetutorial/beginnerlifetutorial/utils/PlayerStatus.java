@@ -2,15 +2,16 @@ package beginnerlifetutorial.beginnerlifetutorial.utils;
 
 import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase;
 import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerStatus {
     private TutorialType tutorialType;
     private TutorialPhase tutorialPhase;
 
     // 資源チュートリアル用
-    private PlayerInventory beforeTutorialInventory;
+    private ItemStack[] beforeTutorialInventoryContents;
     private double beforeTutorialBalance;
+    private int beforeTutorialHerbalismXP;
 
     public void setTutorialType(TutorialType tutorialType) {
         this.tutorialType = tutorialType;
@@ -20,12 +21,16 @@ public class PlayerStatus {
         this.tutorialPhase = tutorialPhase;
     }
 
-    public void setBeforeTutorialInventory(PlayerInventory beforeTutorialInventory) {
-        this.beforeTutorialInventory = beforeTutorialInventory;
+    public void setBeforeTutorialInventory(ItemStack[] beforeTutorialInventoryContents) {
+        this.beforeTutorialInventoryContents = beforeTutorialInventoryContents;
     }
 
     public void setBeforeTutorialBalance(double beforeTutorialBalance) {
         this.beforeTutorialBalance = beforeTutorialBalance;
+    }
+
+    public void setBeforeTutorialHerbalismXP(int beforeTutorialHerbalismXP) {
+        this.beforeTutorialHerbalismXP = beforeTutorialHerbalismXP;
     }
 
     public TutorialType getTutorialType() {
@@ -36,11 +41,15 @@ public class PlayerStatus {
         return tutorialPhase;
     }
 
-    public PlayerInventory getBeforeTutorialInventory() {
-        return beforeTutorialInventory;
+    public ItemStack[] getBeforeTutorialInventory() {
+        return beforeTutorialInventoryContents;
     }
 
     public double getBeforeTutorialBalance() {
         return beforeTutorialBalance;
+    }
+
+    public int getBeforeTutorialHerbalismXP() {
+        return beforeTutorialHerbalismXP;
     }
 }
