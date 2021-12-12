@@ -1,5 +1,6 @@
 package beginnerlifetutorial.beginnerlifetutorial.commands;
 
+import com.gmail.nossr50.api.ExperienceAPI;
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
@@ -64,6 +65,8 @@ public class AdminCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage(Chat.f("&6プレイヤーになろう。", true));
                     }
+
+                    return true;
 
                 default:
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin reload", true));
