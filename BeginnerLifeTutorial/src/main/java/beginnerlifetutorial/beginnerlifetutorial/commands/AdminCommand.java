@@ -1,11 +1,9 @@
 package beginnerlifetutorial.beginnerlifetutorial.commands;
 
-import com.gmail.nossr50.api.ExperienceAPI;
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,7 +35,6 @@ public class AdminCommand implements CommandExecutor {
                         PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
 
                         if (playerStatus != null) {
-                            player.sendMessage(Chat.f("&6あんたが持ってた所持金：{0}", true, String.valueOf(playerStatus.getBeforeTutorialBalance())));
                             player.sendMessage(Chat.f("&6あんたのチュートリアルタイプ：{0}", true, playerStatus.getTutorialType().name()));
                             player.sendMessage(Chat.f("&6あんたのチュートリアルフェーズ：{0}", true, playerStatus.getTutorialPhase().name()));
                         } else {
@@ -58,7 +55,6 @@ public class AdminCommand implements CommandExecutor {
                             player.getInventory().setContents(playerStatus.getBeforeTutorialInventory());
                             player.sendMessage(Chat.f("&6キャッシュアイテムをロルバしたよん", true));
 
-                            setBalance(player, playerStatus.getBeforeTutorialBalance());
                         } else {
                             player.sendMessage(Chat.f("&6未登録＝チュートリアル始めよう", true));
                         }
@@ -76,13 +72,5 @@ public class AdminCommand implements CommandExecutor {
             }
         }
         return true;
-    }
-
-    private void setBalance(Player player, double balance) {
-        Economy economy = BeginnerLifeTutorial.getEconomy();
-
-        double currentBalance = economy.getBalance(player);
-        economy.withdrawPlayer(player, currentBalance);
-        economy.depositPlayer(player, balance);
     }
 }

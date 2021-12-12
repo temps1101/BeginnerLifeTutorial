@@ -10,7 +10,6 @@ public class PlayerStatus {
 
     // 資源チュートリアル用
     private ItemStack[] beforeTutorialInventoryContents;
-    private double beforeTutorialBalance;
     private int beforeTutorialHerbalismXP;
 
     public void setTutorialType(TutorialType tutorialType) {
@@ -23,10 +22,6 @@ public class PlayerStatus {
 
     public void setBeforeTutorialInventory(ItemStack[] beforeTutorialInventoryContents) {
         this.beforeTutorialInventoryContents = beforeTutorialInventoryContents;
-    }
-
-    public void setBeforeTutorialBalance(double beforeTutorialBalance) {
-        this.beforeTutorialBalance = beforeTutorialBalance;
     }
 
     public void setBeforeTutorialHerbalismXP(int beforeTutorialHerbalismXP) {
@@ -43,10 +38,6 @@ public class PlayerStatus {
 
     public ItemStack[] getBeforeTutorialInventory() {
         return beforeTutorialInventoryContents;
-    }
-
-    public double getBeforeTutorialBalance() {
-        return beforeTutorialBalance;
     }
 
     public int getBeforeTutorialHerbalismXP() {
