@@ -19,7 +19,7 @@ tspLocation:
   yaw: 0.0
 
 # チュートリアルへの扉の座標系
-resourceDoor:
+resourceDoorLocation:
   ==: org.bukkit.Location
   world: tutorial
   x: 0.0
@@ -28,7 +28,7 @@ resourceDoor:
   pitch: 0.0
   yaw: 0.0
 
-shopMoneyDoor:
+shopMoneyDoorLocation:
   ==: org.bukkit.Location
   world: tutorial
   x: 0.0
@@ -37,7 +37,7 @@ shopMoneyDoor:
   pitch: 0.0
   yaw: 0.0
 
-dungeonDoor:
+dungeonDoorLocation:
   ==: org.bukkit.Location
   world: tutorial
   x: 0.0
@@ -46,7 +46,7 @@ dungeonDoor:
   pitch: 0.0
   yaw: 0.0
 
-raidDoor:
+raidDoorLocation:
   ==: org.bukkit.Location
   world: tutorial
   x: 0.0
