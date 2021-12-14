@@ -4,6 +4,7 @@ import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
+import com.gamingmesh.jobs.Jobs;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -63,6 +64,9 @@ public class AdminCommand implements CommandExecutor {
                     }
 
                     return true;
+
+                case "jobs":
+                    Jobs.getJobs().forEach(jobs -> sender.sendMessage(jobs.getName()));
 
                 default:
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin reload", true));

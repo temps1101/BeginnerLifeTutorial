@@ -40,7 +40,9 @@ public class Chat {
         long ticks = 20 * (long) waitFor;
 
         Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+            player.sendMessage(Chat.f("&8-----------------------------------", false));
             player.sendMessage(text);
+            player.sendMessage(Chat.f("&8-----------------------------------", false));
             player.playSound(player.getLocation(), FANCY_SEND_SOUND, 1, 1);
         }, ticks);
     }
