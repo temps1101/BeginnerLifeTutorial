@@ -1,11 +1,93 @@
 # TSPは三重塔のことです。
 
-tutorialWorldName: "world"
-firstSpawnLocation: [0, 0, 0]
-tspLocation: [-8, 8, -522]
+firstSpawnLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+tspLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
 
 # チュートリアルへの扉の座標系
-resourceDoor: [0, 0, 0]
-shopMoneyDoor: [0, 0, 0]
-dungeonDoor: [0, 0, 0]
-raidDoor: [0, 0, 0]
+resourceDoorLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+shopMoneyDoorLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+dungeonDoorLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+raidDoorLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+# 資源チュートリアルの設定
+resourceLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+shopMoneyLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+dungeonLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+raidLocation:
+  ==: org.bukkit.Location
+  world: tutorial
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0

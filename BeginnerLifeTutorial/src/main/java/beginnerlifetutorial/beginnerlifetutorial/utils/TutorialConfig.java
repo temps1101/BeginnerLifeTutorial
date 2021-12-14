@@ -1,79 +1,90 @@
 package beginnerlifetutorial.beginnerlifetutorial.utils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.List;
 
 public class TutorialConfig {
-    private static String tutorialWorldName;
-    private static double[] firstSpawnLocation = new double[3];
-    private static double[] tspLocation = new double[3];
+    // 基本設定
+    private static Location firstSpawnLocation;
+    private static Location tspLocation;
 
     // チュートリアルへの扉の座標系
-    private static double[] resourceDoorLocation = new double[3];
-    private static double[] shopMoneyDoorLocation = new double[3];
-    private static double[] dungeonDoorLocation = new double[3];
-    private static double[] raidDoorLocation = new double[3];
+    private static Location resourceDoorLocation;
+    private static Location shopMoneyDoorLocation;
+    private static Location dungeonDoorLocation;
+    private static Location raidDoorLocation;
+
+    // 資源チュートリアルの設定
+    private static Location resourceLocation;
+    private static Location shopMoneyLocation;
+    private static Location dungeonLocation;
+    private static Location raidLocation;
 
     public static void load(FileConfiguration configuration) {
-        String tutorialWorldName_temp = configuration.getString("tutorialWorldName");
-        List<?> firstSpawnLocation_temp = configuration.getList("firstSpawnLocation");
-        List<?> tspLocation_temp = configuration.getList("tspLocation");
-
-        // チュートリアルへの扉の座標系
-        List<?> resourceDoorLocation_temp = configuration.getList("resourceDoor");
-        List<?> shopMoneyDoorLocation_temp = configuration.getList("shopMoneyDoor");
-        List<?> dungeonDoorLocation_temp = configuration.getList("dungeonDoor");
-        List<?> raidDoorLocation_temp = configuration.getList("raidDoor");
-
-        if (tutorialWorldName_temp != null && firstSpawnLocation_temp != null && tspLocation_temp != null) {
-            tutorialWorldName = tutorialWorldName_temp;
-
-            for (int i=0; i<3; i++) {
-                firstSpawnLocation[i] = (double) (int) firstSpawnLocation_temp.get(i);
-                tspLocation[i] = (double) (int) tspLocation_temp.get(i);
-
-                // チュートリアルへの扉の座標系
-                resourceDoorLocation[i] = (double) (int) resourceDoorLocation_temp.get(i);
-                shopMoneyDoorLocation[i] = (double) (int) shopMoneyDoorLocation_temp.get(i);
-                dungeonDoorLocation[i] = (double) (int) dungeonDoorLocation_temp.get(i);
-                raidDoorLocation[i] = (double) (int) raidDoorLocation_temp.get(i);
+        for (Object value : configuration.getValues(true).values()) {
+            if (value == null) {
+                return;
             }
         }
+
+        // 基本設定
+        firstSpawnLocation = configuration.getLocation("firstSpawnLocation");
+        tspLocation = configuration.getLocation("tspLocation");
+
+        // チュートリアルへの扉の座標系
+        resourceDoorLocation = configuration.getLocation("resourceDoorLocation");
+        shopMoneyDoorLocation = configuration.getLocation("shopMoneyDoorLocation");
+        dungeonDoorLocation = configuration.getLocation("dungeonDoorLocation");
+        raidDoorLocation = configuration.getLocation("raidDoorLocation");
+
+        // 資源チュートリアルの設定
+        resourceLocation = configuration.getLocation("resourceLocation");
+        shopMoneyLocation = configuration.getLocation("shopMoneyLocation");
+        dungeonLocation = configuration.getLocation("dungeonLocation");
+        raidLocation = configuration.getLocation("raidLocation");
     }
 
-    public static String getTutorialWorldName() {
-        return tutorialWorldName;
-    }
-
+    // 基本設定
     public static Location getFirstSpawnLocation() {
-        return toLocation(firstSpawnLocation, tutorialWorldName);
+        return firstSpawnLocation;
     }
 
     public static Location getTspLocation() {
-        return toLocation(tspLocation, tutorialWorldName);
+        return tspLocation;
     }
 
+    // チュートリアルへの扉の座標系
     public static Location getResourceDoorLocation() {
-        return toLocation(resourceDoorLocation, tutorialWorldName);
+        return resourceDoorLocation;
     }
 
     public static Location getShopMoneyDoorLocation() {
-        return toLocation(shopMoneyDoorLocation, tutorialWorldName);
+        return shopMoneyDoorLocation;
     }
 
     public static Location getDungeonDoorLocation() {
-        return toLocation(dungeonDoorLocation, tutorialWorldName);
+        return dungeonDoorLocation;
     }
 
     public static Location getRaidDoorLocation() {
-        return toLocation(raidDoorLocation, tutorialWorldName);
+        return raidDoorLocation;
     }
 
-    private static Location toLocation(double[] configLocation, String worldName) {
-        return new Location(Bukkit.getWorld(worldName), configLocation[0], configLocation[1], configLocation[2]);
+    // 資源チュートリアルの設定
+    public static Location getResourceLocation() {
+        return resourceLocation;
     }
 
+    public static Location getShopMoneyLocation() {
+        return shopMoneyLocation;
+    }
+
+    public static Location getDungeonLocation() {
+        return dungeonLocation;
+    }
+
+    public static Location getRaidLocation() {
+        return raidLocation;
+    }
 }

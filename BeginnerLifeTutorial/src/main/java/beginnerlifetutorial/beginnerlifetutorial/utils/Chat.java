@@ -39,12 +39,11 @@ public class Chat {
     public static void fancySend(Player player, boolean playSound, int waitFor, String text) {
         long ticks = 20 * (long) waitFor;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
-            @Override
-            public void run() {
-                player.sendMessage(text);
-                player.playSound(player.getLocation(), FANCY_SEND_SOUND, 1, 1);
-            }
+        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+            player.sendMessage(Chat.f("&8-----------------------------------", false));
+            player.sendMessage(text);
+            player.sendMessage(Chat.f("&8-----------------------------------", false));
+            player.playSound(player.getLocation(), FANCY_SEND_SOUND, 1, 1);
         }, ticks);
     }
 }

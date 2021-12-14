@@ -1,6 +1,13 @@
 package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
+import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
+import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType;
+import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStepEvent;
+import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
+import beginnerlifetutorial.beginnerlifetutorial.utils.ItemUtil;
+import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,30 +17,43 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase.START;
+import static beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType.*;
+
+
 public class PlayerDoorOpenedListener implements Listener {
     private Material DOOR = Material.DARK_OAK_DOOR;
     @EventHandler
     public void onDoorOpened(PlayerInteractEvent event) {
-        Block clickedBlock = event.getClickedBlock();
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && clickedBlock.getType() == DOOR) {
-            Player player = event.getPlayer();
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            Block clickedBlock = event.getClickedBlock();
+            if (clickedBlock.getType() == DOOR) {
+                Player player = event.getPlayer();
+                TutorialType tutorialType = null;
+                if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation())) {
+                    tutorialType = RESOURCE;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation())) {
+                    tutorialType = SHOPMONEY;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getDungeonDoorLocation())) {
+                    tutorialType = DUNGEON;
+                } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getRaidDoorLocation())) {
+                    tutorialType = RAID;
+                }
 
-            if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getResourceDoorLocation()) ) {
-                player.sendMessage("資源を開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // 資源チュートリアルにワープ
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getShopMoneyDoorLocation()) ) {
-                player.sendMessage("ショップ系を開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // ショップ&マネーチュートリアルにワープ
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getDungeonDoorLocation()) ) {
-                player.sendMessage("ダンジョンを開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // ダンジョンチュートリアルにワープ
-            } else if (isDoorSameCoordinate(clickedBlock.getLocation(), TutorialConfig.getRaidDoorLocation()) ) {
-                player.sendMessage("レイドを開けましたねん？"); // TODO デバッグだからあとでとる。
-                event.setCancelled(true);
-                // レイドチュートリアルにワープ
+                if (tutorialType != null) {
+                    PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
+                    if (playerStatus == null) {
+                        playerStatus = new PlayerStatus();
+                        BeginnerLifeTutorial.getPlayerCache().put(player, playerStatus);
+                    }
+
+                    playerStatus.setTutorialType(tutorialType);
+                    playerStatus.setTutorialPhase(START);
+                    BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+
+                    Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                    event.setCancelled(true);
+                }
             }
         }
     }
