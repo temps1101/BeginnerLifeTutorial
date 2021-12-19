@@ -1,6 +1,7 @@
 package beginnerlifetutorial.beginnerlifetutorial;
 
 import beginnerlifetutorial.beginnerlifetutorial.commands.AdminCommand;
+import beginnerlifetutorial.beginnerlifetutorial.commands.NavigatorCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.TutorialCommand;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.ResourceTutorialWorldListener;
 import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerDoorOpenedListener;
@@ -34,6 +35,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
 
         Bukkit.getPluginCommand("ltutorial").setExecutor(new TutorialCommand());
         Bukkit.getPluginCommand("ltutorialAdmin").setExecutor(new AdminCommand(this));
+        Bukkit.getPluginCommand("ltutorialNavigator").setExecutor(new NavigatorCommand());
 
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDoorOpenedListener(), this);
