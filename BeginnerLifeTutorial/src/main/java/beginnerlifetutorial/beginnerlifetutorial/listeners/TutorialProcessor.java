@@ -53,13 +53,13 @@ public class TutorialProcessor implements Listener {
                         player.sendTitle(Chat.f("&6資源チュートリアル", false), Chat.f("&6RESOURCE TUTORIAL", false), 10, 70, 20);
 
                         Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
-                            stepTutorialWithButton(player, Chat.f("&6ここは資源ワールドです。", false), "次へ", NEXT_MESSAGE_PRESSED_1);
+                            stepTutorialWithButton(player, Chat.f("&6ここは資源ワールドです。", false), "次へ", START, NEXT_MESSAGE_PRESSED_1);
                         }, 20*4); // 4s遅延
 
                         break;
 
                     case NEXT_MESSAGE_PRESSED_1:
-                        stepTutorialWithButton(player, Chat.f("&6まずは桑を入手し、目の前の小麦を収穫してみましょう。", false), "桑を入手する", HOE_BUTTON_PRESSED);
+                        stepTutorialWithButton(player, Chat.f("&6まずは桑を入手し、目の前の小麦を収穫してみましょう。", false), "桑を入手する", NEXT_MESSAGE_PRESSED_1, HOE_BUTTON_PRESSED);
                         break;
 
                     case HOE_BUTTON_PRESSED:
@@ -69,46 +69,50 @@ public class TutorialProcessor implements Listener {
                         playerStatus.setTutorialPhase(WAITING_WHEAT_HARVESTED);
                         BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
 
+                        player.sendMessage(Chat.f("&6収穫してみてください！", false));
+
                         break;
 
                     case WHEAT_HARVESTED:
                         Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
-                            stepTutorialWithButton(player, Chat.f("&6画面上部に緑色のバーで出たのがMCMMOのレベル、青色のバーで出たのがjobsのレベルです。", false), "次へ", NEXT_MESSAGE_PRESSED_2);
+                            stepTutorialWithButton(player, Chat.f("&6画面上部に緑色のバーで出たのがMCMMOのレベル、青色のバーで出たのがjobsのレベルです。", false), "次へ", WHEAT_HARVESTED, NEXT_MESSAGE_PRESSED_2);
                         }, 20*2); // 2s遅延
 
                         break;
 
                     case NEXT_MESSAGE_PRESSED_2:
-                        stepTutorialWithButton(player, Chat.f("&6MCMMOのレベルを増やすと使えるスキルが増え、jobsのレベルを増やすともらえるお金が増えます。", false), "次へ", NEXT_MESSAGE_PRESSED_3);
+                        stepTutorialWithButton(player, Chat.f("&6MCMMOのレベルを増やすと使えるスキルが増え、jobsのレベルを増やすともらえるお金が増えます。", false), "次へ", NEXT_MESSAGE_PRESSED_2, NEXT_MESSAGE_PRESSED_3);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_3:
-                        stepTutorialWithButton(player, Chat.f("&6次は桑のスキルを使って収穫してみましょう。", false), "次へ", NEXT_MESSAGE_PRESSED_4);
+                        stepTutorialWithButton(player, Chat.f("&6次は桑のスキルを使って収穫してみましょう。", false), "次へ", NEXT_MESSAGE_PRESSED_3, NEXT_MESSAGE_PRESSED_4);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_4:
-                        stepTutorialWithButton(player, Chat.f("&6桑のスキルを発動させると、一定期間の間収穫量が増え、自動でタネを植え直してくれます。", false), "次へ", NEXT_MESSAGE_PRESSED_5);
+                        stepTutorialWithButton(player, Chat.f("&6桑のスキルを発動させると、一定期間の間収穫量が増え、自動でタネを植え直してくれます。", false), "次へ", NEXT_MESSAGE_PRESSED_4, NEXT_MESSAGE_PRESSED_5);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_5:
-                        stepTutorialWithButton(player, Chat.f("&6桑を一度右クリックした後、『&3You &6ready &3your Hoe.&6』と出たのを確認した後5秒以内に小麦を左クリックで収穫すると、『&2**GREEN TERRA ACTIVATED**&6』と表示され、スキルが発動されます。", false), "次へ", NEXT_MESSAGE_PRESSED_6);
+                        stepTutorialWithButton(player, Chat.f("&6桑を一度右クリックした後、『&3You &6ready &3your Hoe.&6』と出たのを確認した後5秒以内に小麦を左クリックで収穫すると、『&2**GREEN TERRA ACTIVATED**&6』と表示され、スキルが発動されます。", false), "次へ", NEXT_MESSAGE_PRESSED_5, NEXT_MESSAGE_PRESSED_6);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_6:
-                        stepTutorialWithButton(player, Chat.f("&6ではスキルを使って収穫しましょう！", false), "スキルを使って収穫", START_SKILL);
+                        stepTutorialWithButton(player, Chat.f("&6ではスキルを使って収穫しましょう！", false), "スキルを使って収穫", NEXT_MESSAGE_PRESSED_6, START_SKILL);
                         break;
 
                     case START_SKILL:
                         playerStatus.setTutorialPhase(WAITING_GREEN_TERRA_FINISHED);
                         BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                        player.sendMessage(Chat.f("&6収穫してみてください！", false));
+                        player.playSound(player.getLocation(), BLOCK_SCAFFOLDING_BREAK, 1, 1);
                         break;
 
                     case GREEN_TERRA_FINISHED:
-                        stepTutorialWithButton(player, Chat.f("&6スキルが使用できましたね！", false), "次へ", NEXT_MESSAGE_PRESSED_7);
+                        stepTutorialWithButton(player, Chat.f("&6スキルが使用できましたね！", false), "次へ", GREEN_TERRA_FINISHED, NEXT_MESSAGE_PRESSED_7);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_7:
-                        stepTutorialWithButton(player, Chat.f("&6桑以外にもこのサーバーにはたくさんのスキルがあります。https://wikiここで確認してみてください。", false), "次へ", NEXT_MESSAGE_PRESSED_7);
+                        stepTutorialWithButton(player, Chat.f("&6桑以外にもこのサーバーにはたくさんのスキルがあります。https://wikiここで確認してみてください。", false), "次へ", NEXT_MESSAGE_PRESSED_7, NEXT_MESSAGE_PRESSED_7);
                         break;
                 }
 
@@ -161,9 +165,9 @@ public class TutorialProcessor implements Listener {
         player.sendTitle(Chat.f(japaneseTitle, false), Chat.f(englishTitle, false), 10, 70, 20);
     }
 
-    private void stepTutorialWithButton(Player player, String mainMessage, String buttonLabel, TutorialPhase nextPhase) {
+    private void stepTutorialWithButton(Player player, String mainMessage, String buttonLabel, TutorialPhase currentPhase, TutorialPhase nextPhase) {
         TextComponent button = new TextComponent(Chat.f("&a&l[{0}]", false, buttonLabel));
-        button.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ltutorialNavigator caravan " + nextPhase.toString()));
+        button.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ltutorialNavigator caravan" + " " + currentPhase.toString() +  " " + nextPhase.toString()));
 
         player.sendMessage(Chat.f("&8==============================", false));
         player.sendMessage(mainMessage);

@@ -21,11 +21,13 @@ public class NavigatorCommand implements CommandExecutor {
             if (Objects.equals(args[0], COMMAND_PASSWORD)) {
                 if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
                     PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
-                    playerStatus.setTutorialPhase(TutorialPhase.valueOf(args[1]));
+                    if (playerStatus.getTutorialPhase() == TutorialPhase.valueOf(args[1])) {
+                        playerStatus.setTutorialPhase(TutorialPhase.valueOf(args[2]));
 
-                    BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                        BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
 
-                    Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                        Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                    }
                 }
             }
         }
