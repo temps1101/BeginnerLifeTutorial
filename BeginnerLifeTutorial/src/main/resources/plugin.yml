@@ -10,6 +10,9 @@ commands:
     description: チュートリアルコマンド
     permission: ltutorial.permission.member
 
+  ltutorialNavigator:
+    permission: ltutorial.permission.member
+
   ltutorialAdmin:
     aliases: [lta]
     description: チュートリアルの管理
