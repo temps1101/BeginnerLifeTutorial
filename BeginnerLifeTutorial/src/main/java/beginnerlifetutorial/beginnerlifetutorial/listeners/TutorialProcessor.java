@@ -5,7 +5,7 @@ import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase;
 import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType;
 import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStepEvent;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
-import beginnerlifetutorial.beginnerlifetutorial.utils.ItemUtil;
+import beginnerlifetutorial.beginnerlifetutorial.utils.ItemCreator;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import com.gamingmesh.jobs.Jobs;
@@ -18,6 +18,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemFlag;
 
 import static beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase.*;
 import static org.bukkit.Sound.*;
@@ -63,7 +64,7 @@ public class TutorialProcessor implements Listener {
                         break;
 
                     case HOE_BUTTON_PRESSED:
-                        player.getInventory().setItemInMainHand(ItemUtil.createItem(Material.DIAMOND_HOE, "&6チュートリアル用クワ", 1, "&fチュートリアル用に作られた桑"));
+                        player.getInventory().setItemInMainHand(ItemCreator.start().material(Material.DIAMOND_HOE).name("&6チュートリアル用クワ").unbreakable(true).lore("&fチュートリアル用に作られた桑").count(1).flags(ItemFlag.HIDE_UNBREAKABLE).create());
                         player.playSound(player.getLocation(), ITEM_ARMOR_EQUIP_DIAMOND, 1, 1);
 
                         playerStatus.setTutorialPhase(WAITING_WHEAT_HARVESTED);
@@ -112,8 +113,41 @@ public class TutorialProcessor implements Listener {
                         break;
 
                     case NEXT_MESSAGE_PRESSED_7:
-                        stepTutorialWithButton(player, Chat.f("&6桑以外にもこのサーバーにはたくさんのスキルがあります。https://wikiここで確認してみてください。", false), "次へ", NEXT_MESSAGE_PRESSED_7, NEXT_MESSAGE_PRESSED_7);
+                        stepTutorialWithButton(player, Chat.f("&6桑以外にもこのサーバーにはたくさんのスキルがあります。https://azisabaofficial.playing.wiki/d/MCMMOここで確認してみてください。", false), "次へ", NEXT_MESSAGE_PRESSED_7, NEXT_MESSAGE_PRESSED_8);
                         break;
+
+                    case NEXT_MESSAGE_PRESSED_8:
+                        stepTutorialWithButton(player, Chat.f("&6次は地下で採掘を体験してみましょう。", false), "洞窟へ移動する", NEXT_MESSAGE_PRESSED_8, TP_CAVE);
+                        break;
+
+                    case TP_CAVE:
+                        player.getInventory().clear();
+                        player.teleport(TutorialConfig.getResourceCaveLocation());
+                        player.sendMessage(Chat.f("&6洞窟前にテレポートさせました。", false));
+                        player.playSound(player.getLocation(), ENTITY_PLAYER_LEVELUP, 1, 1);
+
+                        Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
+                            stepTutorialWithButton(player, Chat.f("&6まずは目の前の村人から&aオンタイムチケット&6を使ってツルハシを購入しましょう。", false), "次へ", TP_CAVE, NEXT_MESSAGE_PRESSED_9);
+                        }, 20*4); // 4s遅延
+
+                    case NEXT_MESSAGE_PRESSED_9:
+                        stepTutorialWithButton(player, Chat.f("&6まず、オンタイムチケットについての説明をします。", false), "次へ", NEXT_MESSAGE_PRESSED_9, NEXT_MESSAGE_PRESSED_10);
+                        break;
+
+                    case NEXT_MESSAGE_PRESSED_10:
+                        stepTutorialWithButton(player, Chat.f("&6オンタイムチケットとはアジ鯖内のほとんどのサーバーで使用できるポイントのことです。ポイントはアジ鯖にいる際に定期的に付与されるので、鯖内で放置をしてオンタイムポイントを稼ぐプレイヤーもよくいます。", false), "次へ", NEXT_MESSAGE_PRESSED_10, NEXT_MESSAGE_PRESSED_11);
+                        break;
+
+                    case NEXT_MESSAGE_PRESSED_11:
+                        stepTutorialWithButton(player, Chat.f("&6オンタイムポイントは、&a/ott&6コマンドでオンタイムチケットに、インベントリー内のオンタイムチケットは&a/tto&6コマンドでオンタイムポイントに変換できます。", false), "次へ", NEXT_MESSAGE_PRESSED_11, NEXT_MESSAGE_PRESSED_12);
+                        break;
+
+                    case NEXT_MESSAGE_PRESSED_12:
+                        stepTutorialWithButton(player, Chat.f("&6オンタイムチケットはLife鯖はもちろん、他のサーバーでもアイテム購入や取引に使えます。", false), "次へ", NEXT_MESSAGE_PRESSED_12, NEXT_MESSAGE_PRESSED_13);
+                        break;
+
+                    case NEXT_MESSAGE_PRESSED_13:
+                        stepTutorialWithButton(player, Chat.f("&6では実際にオンタイムチケットを&a/ott&6コマンドで入手してみてください！", false), "OK", NEXT_MESSAGE_PRESSED_12, NEXT_MESSAGE_PRESSED_13);
                 }
 
                 break;
