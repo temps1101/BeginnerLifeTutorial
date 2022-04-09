@@ -3,8 +3,6 @@ package beginnerlifetutorial.beginnerlifetutorial.listeners;
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType;
 import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStepEvent;
-import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
-import beginnerlifetutorial.beginnerlifetutorial.utils.ItemUtil;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import org.bukkit.Bukkit;

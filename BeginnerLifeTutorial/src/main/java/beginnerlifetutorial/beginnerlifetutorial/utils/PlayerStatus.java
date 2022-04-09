@@ -15,6 +15,7 @@ public class PlayerStatus {
     private ItemStack[] beforeTutorialInventoryContents;
     private int beforeTutorialHerbalismXP;
     private List<JobProgression> beforeTutorialJobsProgressions;
+    private int dummyOntimePoint;
 
     public void setTutorialType(TutorialType tutorialType) {
         this.tutorialType = tutorialType;
@@ -36,6 +37,10 @@ public class PlayerStatus {
         this.beforeTutorialJobsProgressions = beforeTutorialJobsProgressions;
     }
 
+    public void setDummyOntimePoint(int dummyOntimePoint) {
+        this.dummyOntimePoint = dummyOntimePoint;
+    }
+
     public TutorialType getTutorialType() {
         return tutorialType;
     }
@@ -54,5 +59,9 @@ public class PlayerStatus {
 
     public List<JobProgression> getBeforeTutorialJobsProgressions() {
         return beforeTutorialJobsProgressions;
+    }
+
+    public int getDummyOntimePoint() {
+        return dummyOntimePoint;
     }
 }

@@ -2,13 +2,22 @@ package beginnerlifetutorial.beginnerlifetutorial.commands;
 
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
+import beginnerlifetutorial.beginnerlifetutorial.utils.ItemCreator;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import com.gamingmesh.jobs.Jobs;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.server.v1_15_R1.MojangsonParser;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 
 
 public class AdminCommand implements CommandExecutor {
@@ -67,6 +76,29 @@ public class AdminCommand implements CommandExecutor {
 
                 case "jobs":
                     Jobs.getJobs().forEach(jobs -> sender.sendMessage(jobs.getName()));
+
+                case "ott":
+                    if (sender instanceof Player) {
+                        Player player = (Player) sender;
+
+                        player.getInventory().addItem(ItemCreator.start()
+                                .material(Material.PAPER)
+                                .count(1)
+                                .name("&aオンタイムチケット")
+                                .lore("ログインしていると一定時間ごとにもらえる。")
+                                .lore("換金、特殊アイテムとの交換等に使える。")
+                                .unbreakable(true)
+                                .enchantment(Enchantment.MENDING, 1)
+                                .flags(ItemFlag.HIDE_ENCHANTS)
+                                .flags(ItemFlag.HIDE_DESTROYS)
+                                .create());
+                    } else {
+                        sender.sendMessage(Chat.f("&6プレイヤーになろう。", true));
+                    }
+
+                    return true;
+
+
 
                 default:
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin reload", true));

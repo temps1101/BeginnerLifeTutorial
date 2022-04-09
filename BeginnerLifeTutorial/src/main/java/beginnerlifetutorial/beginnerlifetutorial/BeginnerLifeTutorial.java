@@ -3,14 +3,14 @@ package beginnerlifetutorial.beginnerlifetutorial;
 import beginnerlifetutorial.beginnerlifetutorial.commands.AdminCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.NavigatorCommand;
 import beginnerlifetutorial.beginnerlifetutorial.commands.TutorialCommand;
-import beginnerlifetutorial.beginnerlifetutorial.listeners.ResourceTutorialWorldListener;
-import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerDoorOpenedListener;
-import beginnerlifetutorial.beginnerlifetutorial.listeners.PlayerFirstJoinListener;
-import beginnerlifetutorial.beginnerlifetutorial.listeners.TutorialProcessor;
+import beginnerlifetutorial.beginnerlifetutorial.listeners.*;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -36,11 +36,19 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
         Bukkit.getPluginCommand("ltutorial").setExecutor(new TutorialCommand());
         Bukkit.getPluginCommand("ltutorialAdmin").setExecutor(new AdminCommand(this));
         Bukkit.getPluginCommand("ltutorialNavigator").setExecutor(new NavigatorCommand());
+        Bukkit.getPluginCommand("tradeOntimeDummy").setExecutor(new CommandExecutor() {
+            @Override
+            public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+                sender.sendMessage("dami-tukaunaaho");
+                return true;
+            }
+        });
 
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDoorOpenedListener(), this);
         Bukkit.getPluginManager().registerEvents(new ResourceTutorialWorldListener(), this);
         Bukkit.getPluginManager().registerEvents(new TutorialProcessor(), this);
+        Bukkit.getPluginManager().registerEvents(new OverrideCommands(), this);
     }
 
     @Override

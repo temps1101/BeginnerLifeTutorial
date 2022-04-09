@@ -17,6 +17,7 @@ public class TutorialConfig {
 
     // 資源チュートリアルの設定
     private static Location resourceLocation;
+    private static Location resourceCaveLocation;
     private static Location shopMoneyLocation;
     private static Location dungeonLocation;
     private static Location raidLocation;
@@ -40,6 +41,7 @@ public class TutorialConfig {
 
         // 資源チュートリアルの設定
         resourceLocation = configuration.getLocation("resourceLocation");
+        resourceCaveLocation = configuration.getLocation("resourceCaveLocation");
         shopMoneyLocation = configuration.getLocation("shopMoneyLocation");
         dungeonLocation = configuration.getLocation("dungeonLocation");
         raidLocation = configuration.getLocation("raidLocation");
@@ -74,6 +76,10 @@ public class TutorialConfig {
     // 資源チュートリアルの設定
     public static Location getResourceLocation() {
         return resourceLocation;
+    }
+
+    public static Location getResourceCaveLocation() {
+        return resourceCaveLocation;
     }
 
     public static Location getShopMoneyLocation() {

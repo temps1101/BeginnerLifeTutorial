@@ -46,6 +46,8 @@ public class TutorialProcessor implements Listener {
                         playerStatus.setBeforeTutorialInventory(player.getInventory().getContents());
                         player.getInventory().clear();
 
+                        playerStatus.setDummyOntimePoint(100);
+
                         BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
 
 
@@ -127,7 +129,7 @@ public class TutorialProcessor implements Listener {
                         player.playSound(player.getLocation(), ENTITY_PLAYER_LEVELUP, 1, 1);
 
                         Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
-                            stepTutorialWithButton(player, Chat.f("&6まずは目の前の村人から&aオンタイムチケット&6を使ってツルハシを購入しましょう。", false), "次へ", TP_CAVE, NEXT_MESSAGE_PRESSED_9);
+                            stepTutorialWithButton(player, Chat.f("&6では、目の前の村人から&aオンタイムチケット&6を使ってツルハシを購入しましょう。", false), "次へ", TP_CAVE, NEXT_MESSAGE_PRESSED_9);
                         }, 20*4); // 4s遅延
 
                     case NEXT_MESSAGE_PRESSED_9:
@@ -135,7 +137,7 @@ public class TutorialProcessor implements Listener {
                         break;
 
                     case NEXT_MESSAGE_PRESSED_10:
-                        stepTutorialWithButton(player, Chat.f("&6オンタイムチケットとはアジ鯖内のほとんどのサーバーで使用できるポイントのことです。ポイントはアジ鯖にいる際に定期的に付与されるので、鯖内で放置をしてオンタイムポイントを稼ぐプレイヤーもよくいます。", false), "次へ", NEXT_MESSAGE_PRESSED_10, NEXT_MESSAGE_PRESSED_11);
+                        stepTutorialWithButton(player, Chat.f("&6オンタイムチケットとはアジ鯖内のほとんどのサーバーで使用できるポイントのことです。ポイントはアジ鯖にいる際に定期的に付与されます。", false), "次へ", NEXT_MESSAGE_PRESSED_10, NEXT_MESSAGE_PRESSED_11);
                         break;
 
                     case NEXT_MESSAGE_PRESSED_11:
@@ -147,9 +149,15 @@ public class TutorialProcessor implements Listener {
                         break;
 
                     case NEXT_MESSAGE_PRESSED_13:
-                        stepTutorialWithButton(player, Chat.f("&6では実際にオンタイムチケットを&a/ott&6コマンドで入手してみてください！", false), "OK", NEXT_MESSAGE_PRESSED_12, NEXT_MESSAGE_PRESSED_13);
-                }
+                        stepTutorialWithButton(player, Chat.f("&6では実際にオンタイムチケットを&a/ott&6コマンドで入手してみてください！", false), "OK", NEXT_MESSAGE_PRESSED_13, NEXT_MESSAGE_PRESSED_14);
 
+                    case NEXT_MESSAGE_PRESSED_14:
+                        Chat.f("&6どうぞ！", false);
+
+                    case OTT_GAVE:
+                        Chat.f("&6では、今入手したオンタイムチケットで目の前にいる村人とツルハシを交換してみましょう！", false);
+
+                }
                 break;
 
             case SHOPMONEY:
