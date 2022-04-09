@@ -18,17 +18,21 @@ public class NavigatorCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (Objects.equals(args[0], COMMAND_PASSWORD)) {
-                if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
-                    PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
-                    if (playerStatus.getTutorialPhase() == TutorialPhase.valueOf(args[1])) {
-                        playerStatus.setTutorialPhase(TutorialPhase.valueOf(args[2]));
+            if (args.length == 3) {
+                if (Objects.equals(args[0], COMMAND_PASSWORD)) {
+                    if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
+                        PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
+                        if (playerStatus.getTutorialPhase() == TutorialPhase.valueOf(args[1])) {
+                            playerStatus.setTutorialPhase(TutorialPhase.valueOf(args[2]));
 
-                        BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                            BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
 
-                        Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                            Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                        }
                     }
                 }
+            } else {
+                player.sendMessage("隠しコマンドは使わないの！！のーたっち！！");
             }
         }
         return true;
