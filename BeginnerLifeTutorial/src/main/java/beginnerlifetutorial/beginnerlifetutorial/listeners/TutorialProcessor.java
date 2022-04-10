@@ -157,6 +157,8 @@ public class TutorialProcessor implements Listener {
                     case OTT_GAVE:
                         Chat.f("&6では、今入手したオンタイムチケットで目の前にいる村人とツルハシを交換してみましょう！", false);
 
+                    case PICKAXE_BOUGHT:
+                        Chat.f("購入しましたね！では、目の前の資源を採掘しましょう！", false);
                 }
                 break;
 
