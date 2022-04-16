@@ -152,13 +152,24 @@ public class TutorialProcessor implements Listener {
                         stepTutorialWithButton(player, Chat.f("&6では実際にオンタイムチケットを&a/ott&6コマンドで入手してみてください！", false), "OK", NEXT_MESSAGE_PRESSED_13, NEXT_MESSAGE_PRESSED_14);
 
                     case NEXT_MESSAGE_PRESSED_14:
-                        Chat.f("&6どうぞ！", false);
+                        player.playSound(player.getLocation(), BLOCK_SCAFFOLDING_BREAK, 1, 1);
+                        player.sendMessage(Chat.f("&6どうぞ！", false));
 
                     case OTT_GAVE:
-                        Chat.f("&6では、今入手したオンタイムチケットで目の前にいる村人とツルハシを交換してみましょう！", false);
+                        player.playSound(player.getLocation(), BLOCK_SCAFFOLDING_BREAK, 1, 1);
+                        player.sendMessage(Chat.f("&8==============================", false));
+                        player.sendMessage(Chat.f("&6では、今入手したオンタイムチケットで目の前にいる村人とツルハシを交換してみましょう！", false));
+                        player.sendMessage(Chat.f("&8==============================", false));
 
                     case PICKAXE_BOUGHT:
-                        Chat.f("購入しましたね！では、目の前の資源を採掘しましょう！", false);
+                        player.sendMessage(Chat.f("&8==============================", false));
+                        player.sendMessage(Chat.f("購入しましたね！では、目の前の資源を採掘しましょう！", false));
+                        player.sendMessage(Chat.f("&8==============================", false));
+                        if (playerStatus.getMineAmount() == 10) {
+                            player.sendMessage(Chat.f("&8==============================", false));
+                            player.sendMessage(Chat.f("資源ワールドで採掘をしていると、一定確率で資源チケットを入手できます。", false));
+                            player.sendMessage(Chat.f("&8==============================", false));
+                        }
                 }
                 break;
 

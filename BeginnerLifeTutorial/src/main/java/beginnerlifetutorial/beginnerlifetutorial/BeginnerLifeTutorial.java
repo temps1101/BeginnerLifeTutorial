@@ -39,7 +39,7 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
         Bukkit.getPluginCommand("tradeOntimeDummy").setExecutor(new CommandExecutor() {
             @Override
             public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-                sender.sendMessage("dami-tukaunaaho");
+                sender.sendMessage("ダミーなのさ");
                 return true;
             }
         });
@@ -49,7 +49,6 @@ public final class BeginnerLifeTutorial extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new ResourceTutorialWorldListener(), this);
         Bukkit.getPluginManager().registerEvents(new TutorialProcessor(), this);
         Bukkit.getPluginManager().registerEvents(new OverrideCommands(), this);
-        Bukkit.getPluginManager().registerEvents(new BuyPickaxeListener(), this);
     }
 
     @Override

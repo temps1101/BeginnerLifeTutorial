@@ -1,23 +1,19 @@
 package beginnerlifetutorial.beginnerlifetutorial.commands;
 
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
+import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialItems;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.ItemCreator;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
 import beginnerlifetutorial.beginnerlifetutorial.utils.TutorialConfig;
 import com.gamingmesh.jobs.Jobs;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.server.v1_15_R1.MojangsonParser;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
 
 
 public class AdminCommand implements CommandExecutor {
@@ -98,7 +94,15 @@ public class AdminCommand implements CommandExecutor {
 
                     return true;
 
+                case "tutorialpickaxe":
+                    if (sender instanceof Player) {
+                        Player player = (Player) sender;
+                        player.getInventory().addItem(TutorialItems.getTutorialPickaxe());
+                    } else {
+                        sender.sendMessage(Chat.f("&6プレイヤーになろう。", true));
+                    }
 
+                    return true;
 
                 default:
                     sender.sendMessage(Chat.f("&6/ltutorialAdmin reload", true));

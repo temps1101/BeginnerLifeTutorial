@@ -16,6 +16,7 @@ public class PlayerStatus {
     private int beforeTutorialHerbalismXP;
     private List<JobProgression> beforeTutorialJobsProgressions;
     private int dummyOntimePoint;
+    private int mineAmount;
 
     public void setTutorialType(TutorialType tutorialType) {
         this.tutorialType = tutorialType;
@@ -41,6 +42,14 @@ public class PlayerStatus {
         this.dummyOntimePoint = dummyOntimePoint;
     }
 
+    public void setMineAmount(int mineAmount) {
+        this.mineAmount = mineAmount;
+    }
+
+    public void addMineAmount(int mineAmount) {
+        this.mineAmount += mineAmount;
+    }
+
     public TutorialType getTutorialType() {
         return tutorialType;
     }
@@ -63,5 +72,9 @@ public class PlayerStatus {
 
     public int getDummyOntimePoint() {
         return dummyOntimePoint;
+    }
+
+    public int getMineAmount() {
+        return mineAmount;
     }
 }

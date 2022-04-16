@@ -1,6 +1,9 @@
 package beginnerlifetutorial.beginnerlifetutorial.listeners;
 
 import beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial;
+import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialItems;
+import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase;
+import beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType;
 import beginnerlifetutorial.beginnerlifetutorial.events.TutorialStepEvent;
 import beginnerlifetutorial.beginnerlifetutorial.utils.Chat;
 import beginnerlifetutorial.beginnerlifetutorial.utils.PlayerStatus;
@@ -17,10 +20,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.inventory.MerchantInventory;
 
 import static beginnerlifetutorial.beginnerlifetutorial.enums.TutorialPhase.*;
 import static beginnerlifetutorial.beginnerlifetutorial.enums.TutorialType.RESOURCE;
@@ -30,38 +35,44 @@ public class ResourceTutorialWorldListener implements Listener {
 
     @EventHandler
     public void onDestroyBlock(BlockBreakEvent event) {
-        if (event.getBlock().getWorld() == TutorialConfig.getResourceLocation().getWorld()) {
-            Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
-            if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
-                PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
-                if (playerStatus.getTutorialType() == RESOURCE && (playerStatus.getTutorialPhase() == WAITING_WHEAT_HARVESTED || playerStatus.getTutorialPhase() == WAITING_GREEN_TERRA_FINISHED) && event.getBlock().getType() == Material.WHEAT) {
-                    if (((Ageable) event.getBlock().getBlockData()).getAge() == 7) {
-                        if (playerStatus.getTutorialPhase() == WAITING_WHEAT_HARVESTED) {
-                            playerStatus.setTutorialPhase(WHEAT_HARVESTED);
-                            BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
-                            Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
-                        }
-
-                        Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
-                            Block block = event.getBlock();
-                            block.setType(Material.WHEAT, false);
-
-                            BlockData blockData = block.getBlockData();
-
-                            Ageable ageable = (Ageable) blockData;
-                            ageable.setAge(7);
-
-                            block.setBlockData(ageable);
-                        }, 1200*REGENERATION_DELAY_MINUTES);
-                    } else if (!player.hasPermission("ltutorial.permission.admin")) {
-                        player.sendTitle(Chat.f("&aヒント", false), Chat.f("&6若い小麦はポイントとして加算されません！", false), 0, 140, 0);
-                        event.setCancelled(true);
+        if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
+            PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
+            if (playerStatus.getTutorialType() == RESOURCE &&
+                (playerStatus.getTutorialPhase() == WAITING_WHEAT_HARVESTED || playerStatus.getTutorialPhase() == WAITING_GREEN_TERRA_FINISHED) &&
+                event.getBlock().getType() == Material.WHEAT) { //
+                if (((Ageable) event.getBlock().getBlockData()).getAge() == 7) {
+                    if (playerStatus.getTutorialPhase() == WAITING_WHEAT_HARVESTED) {
+                        playerStatus.setTutorialPhase(WHEAT_HARVESTED);
+                        BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                        Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
                     }
+
+                    Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
+                        Block block = event.getBlock();
+                        block.setType(Material.WHEAT, false);
+
+                        BlockData blockData = block.getBlockData();
+
+                        Ageable ageable = (Ageable) blockData;
+                        ageable.setAge(7);
+
+                        block.setBlockData(ageable);
+                    }, 1200*REGENERATION_DELAY_MINUTES);
                 } else if (!player.hasPermission("ltutorial.permission.admin")) {
-                    player.sendTitle(Chat.f("&aヒント", false), Chat.f("&6本来の資源ワールドなら、このブロックの破壊はできますが、ここはチュートリアル用ワールドなのでできません！", false), 0, 140, 0);
+                    player.sendTitle(Chat.f("&aヒント", false), Chat.f("&6若い小麦はポイントとして加算されません！", false), 0, 140, 0);
                     event.setCancelled(true);
                 }
+            } else if (playerStatus.getTutorialType() == RESOURCE && playerStatus.getTutorialPhase() == PICKAXE_BOUGHT) {
+                playerStatus.addMineAmount(1);
+                Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
+                Bukkit.getScheduler().runTaskLater(BeginnerLifeTutorial.getPlugin(), () -> {
+                    event.setCancelled(true);
+                }, 1200*REGENERATION_DELAY_MINUTES);
+            } else if (!player.hasPermission("ltutorial.permission.admin")) {
+                player.sendTitle(Chat.f("&aヒント", false), Chat.f("&6本来の資源ワールドなら、このブロックの破壊はできますが、ここはチュートリアル用ワールドなのでできません！", false), 0, 140, 0);
+                event.setCancelled(true);
             }
         }
     }
@@ -98,6 +109,29 @@ public class ResourceTutorialWorldListener implements Listener {
                 } else {
                     usingGreenTerraPlayer.add(player);
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClicked(InventoryClickEvent event) {
+        MerchantInventory merchantInventory = (MerchantInventory) event.getClickedInventory();
+        if (merchantInventory != null) {
+            return;
+        }
+
+        if (!(merchantInventory.getSelectedRecipe().getResult() == TutorialItems.getTutorialPickaxe())) {
+            return;
+        }
+
+        Player player = (Player) event.getWhoClicked();
+        if (BeginnerLifeTutorial.getPlayerCache().containsKey(player)) {
+            PlayerStatus playerStatus = BeginnerLifeTutorial.getPlayerCache().get(player);
+            if (playerStatus.getTutorialType() == TutorialType.RESOURCE &&
+                playerStatus.getTutorialPhase() == TutorialPhase.OTT_GAVE) {
+                playerStatus.setTutorialPhase(TutorialPhase.PICKAXE_BOUGHT);
+                BeginnerLifeTutorial.getPlayerCache().replace(player, playerStatus);
+                Bukkit.getPluginManager().callEvent(new TutorialStepEvent(player));
             }
         }
     }
