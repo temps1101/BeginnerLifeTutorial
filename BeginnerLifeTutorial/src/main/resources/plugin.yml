@@ -4,25 +4,6 @@ main: beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial
 api-version: 1.15
 authors: [ 46kuri_, temps1101 ]
 
-commands:
-  ltutorial:
-    aliases: [lt]
-    description: チュートリアルコマンド
-    permission: ltutorial.permission.member
-
-  ltutorialNavigator:
-    permission: ltutorial.permission.member
-
-  ltutorialAdmin:
-    aliases: [lta]
-    description: チュートリアルの管理
-    permission: ltutorial.permission.admin
-
-  tradeOntimeDummy:
-    aliases: [ott]
-    description: ダミーオンタイム
-    permission: ltutorial.permission.member
-
 permissions:
   ltutorial.permission.admin:
     default: op
