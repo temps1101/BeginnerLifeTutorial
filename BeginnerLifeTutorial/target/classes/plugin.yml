@@ -5,26 +5,15 @@ api-version: 1.15
 authors: [ 46kuri_, temps1101 ]
 
 commands:
-  ltutorial:
-    aliases: [lt]
-    description: チュートリアルコマンド
-    permission: ltutorial.permission.member
-
-  ltutorialNavigator:
-    permission: ltutorial.permission.member
-
-  ltutorialAdmin:
-    aliases: [lta]
-    description: チュートリアルの管理
-    permission: ltutorial.permission.admin
-
-  tradeOntimeDummy:
-    aliases: [ott]
-    description: ダミーオンタイム
-    permission: ltutorial.permission.member
+  tutorialAdmin:
+    permission: tutorial.permission.admin
+  tutorial:
+    permission: tutorial.permission.member
+  stepTutorial:
+    permission: tutorial.permission.member
 
 permissions:
-  ltutorial.permission.admin:
+  tutorial.permission.admin:
     default: op
-  ltutorial.permission.member:
+  tutorial.permission.member:
     default: true

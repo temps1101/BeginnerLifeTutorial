@@ -4,8 +4,16 @@ main: beginnerlifetutorial.beginnerlifetutorial.BeginnerLifeTutorial
 api-version: 1.15
 authors: [ 46kuri_, temps1101 ]
 
+commands:
+  tutorialAdmin:
+    permission: tutorial.permission.admin
+  tutorial:
+    permission: tutorial.permission.member
+  stepTutorial:
+    permission: tutorial.permission.member
+
 permissions:
-  ltutorial.permission.admin:
+  tutorial.permission.admin:
     default: op
-  ltutorial.permission.member:
+  tutorial.permission.member:
     default: true
